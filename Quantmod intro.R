@@ -15,3 +15,4 @@ has.Ad(GS)
 #where and what was the high point?
 seriesHi(GS)
 
+# KJW has observed this file.
