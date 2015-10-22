@@ -16,4 +16,8 @@ has.Ad(GS)
 seriesHi(GS)
 
 # KJW has observed this file.
+<<<<<<< HEAD
 # CMD has also observed this file.
+=======
+# RMC has made an attempt to comment
+>>>>>>> origin/master
