@@ -21,3 +21,5 @@ seriesHi(GS)
 =======
 # RMC has made an attempt to comment
 >>>>>>> origin/master
+
+#Shane's comment
