@@ -1,0 +1,195 @@
+\documentclass[11pt]{article}
+\usepackage{amsfonts,amssymb,amsmath,amsthm,epsfig,euscript,verbatim,graphicx}
+\setlength{\textwidth}{6.3in}
+\setlength{\textheight}{8.7in}
+\setlength{\topmargin}{0pt}
+\setlength{\headsep}{0pt}
+\setlength{\headheight}{0pt}
+\setlength{\oddsidemargin}{0pt}
+\setlength{\evensidemargin}{0pt}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{conjecture}{Conjecture}
+
+\def\mn{\makebox[1.1ex]{\rule[.58ex]{.71ex}{.15ex}}}
+
+\long\def\symbolfootnote[#1]#2{\begingroup
+\def\thefootnote{\fnsymbol{footnote}}\footnote[#1]{#2}\endgroup}
+
+% newcommands to be used in math mode
+
+%\newcommand{\coi}[1][\sigma]{\mathrm{coinv}(#1)}
+\newcommand{\coib}[1][\sigma]{\mathrm{coinv}_B(#1)}
+\newcommand{\com}[1][\sigma]{\mathrm{comaj}(#1)}
+\newcommand{\comb}[1][\sigma]{\mathrm{comaj}_B(#1)}
+%\DeclareMathOperator{\des}{\mathrm{des}}
+%\DeclareMathOperator{\maj}{\mathrm{maj}}
+\newcommand{\desb}[1][\sigma]{\mathrm{des}_B(#1)}
+%\newcommand{\epq}[1][t(x-y)]{\mathbf{e}_{p,q}^{#1}}
+\newcommand{\HF}{\xi}
+\newcommand{\HK}{\xi_B}
+%\newcommand{\inv}[1]{\mathrm{inv}(#1)}
+\newcommand{\invb}[1]{\mathrm{inv}_B(#1)}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ris}[1]{\mathrm{ris}(#1)}
+\newcommand{\wris}[1]{\mathrm{wris}(#1)}
+\newcommand{\sris}[1]{\mathrm{sris}(#1)}
+\newcommand{\wmaj}[1][\gamma]{\mathrm{wmaj}(#1)}
+\newcommand{\wdes}[1]{\mathrm{wdes}(#1)}
+\newcommand{\sdes}[1]{\mathrm{sdes}(#1)}
+\newcommand{\des}[1]{\mathrm{des}(#1)}
+\newcommand{\levmaj}[1][\gamma]{\mathrm{levmaj}(#1)}
+\newcommand{\lev}[1][\gamma]{\mathrm{lev}(#1)}
+\DeclareMathOperator{\parts}{parts}
+\newcommand{\majb}[1][\sigma]{\mathrm{maj}_B(#1)}
+\newcommand{\mmaj}[1][\sigma^1,\dots,\sigma^m]{\mathrm{commaj}(#1)}
+\newcommand{\mdes}[1][\sigma^1,\dots,\sigma^m]{\mathrm{comdes}(#1)}
+\newcommand{\nega}[1][\sigma]{\mathrm{neg}(#1)}
+\newcommand{\nth}[1][n]{{#1}^{\mathrm{th}}}
+\newcommand{\ov}{\overline}
+\newcommand{\pos}[1][\sigma]{\mathrm{pos}(#1)}
+\newcommand{\qbinom}[2]{\genfrac{[}{]}{0pt}{}{#1}{#2}_{q}}
+\newcommand{\pqbinom}[2]{\genfrac{[}{]}{0pt}{}{#1}{#2}_{p,q}}
+\newcommand{\rbinom}[2]{\genfrac{[}{]}{0pt}{}{#1}{#2}_{r}}
+%\newcommand{\ris}[1][\sigma]{\mathrm{ris}(#1)}
+%\newcommand{\risb}[1][\sigma]{\mathrm{ris}_B(#1)}
+\newcommand{\sg}{\sigma}
+\newcommand{\ep}{\epsilon}
+\newcommand{\ga}{\gamma}
+\newcommand{\Ta}{\Theta}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Pos}{\mathbb{P}}
+\newcommand{\Ev}{\mathbb{E}}
+\newcommand{\Odd}{\mathbb{O}}
+\newcommand{\sP}{s\mathbb{P}}
+\newcommand{\UD}{U\mbox{-}D}
+\newcommand{\NDD}{ND\mbox{-}D}
+\newcommand{\UNU}{U\mbox{-}NU}
+\newcommand{\ud}{u\mbox{-}d}
+\newcommand{\ndd}{nd\mbox{-}d}
+\newcommand{\unu}{u\mbox{-}nu}
+\def\dd{{\textrm d}}
+%\def\qexp{{\mathbf{e}}_q}
+%\def\pqexp{{\mathbf{e}}_{p,q}}
+
+
+\newcommand{\al}{\alpha}
+\newcommand{\cref}[1]{Corollary \ref{corollary:#1}}
+\newcommand{\cmch}[1][\sg^1,\dots,\sg^m]{\text{$\tau$-$\mathrm{commch}$}(#1)}
+\newcommand{\clap}[1][\sg^1,\dots,\sg^m]{\text{$\tau$-$\mathrm{comnlap}$}(#1)}
+\newcommand{\cvlap}[1][w,y]{\text{$v$-$\mathrm{comnlap}$}(#1)}
+%\newcommand{\des}[1]{\mathrm{des}(#1)}
+%\newcommand{\ep}[1]{\exp \left( #1 \right)}
+\newcommand{\qexp}[1]{\exp_{q} \left( #1 \right)}
+\newcommand{\pqexp}[1]{\exp_{q,p} \left( #1 \right)}
+\newcommand{\Epq}[1]{\mathrm{Exp}_{q} \left( #1 \right)}
+\newcommand{\eref}[1]{\eqref{equation:#1}}
+\newcommand{\FA}{f}
+\newcommand{\FAq}{f_q}
+\newcommand{\FAm}{f_m}
+\newcommand{\FB}{g}
+\newcommand{\FBb}{g_2}
+%\newcommand{\fig}[1]{\vspace{1ex} \begin{center} \input{#1.pstex_t} \end{center%} \vspace{1ex}}
+\newcommand{\Floor}[1][n/2]{\left \lfloor #1 \right \rfloor}
+\newcommand{\HA}{\xi}
+\newcommand{\HAq}{\xi_q}
+\newcommand{\HAm}{\xi_m}
+\newcommand{\HB}{\varphi}
+\newcommand{\HC}{\eta}
+\newcommand{\HCb}{\eta_2}
+\newcommand{\HL}{\vartheta}
+\newcommand{\im}{i}
+\newcommand{\inv}[1]{\mathrm{inv}(#1)}
+\newcommand{\coinv}[1]{\mathrm{coinv}(#1)}
+%\newcommand{\La}{\Lambda}
+%\newcommand{\la}{\lambda}
+\newcommand{\lref}[1]{Lemma \ref{lemma:#1}}
+%\newcommand{\nth}[1][n]{{#1}^{\mathrm{th}}}
+\newcommand{\qbin}[3]{\genfrac{[}{]}{0pt}{}{#1}{#2}_{#3}}
+\newcommand{\red}[1]{\mathrm{red}(#1)}
+%\newcommand{\sg}{\sigma}
+\newcommand{\sm}[2]{\sum_{#1 = #2}^{\infty}}
+\newcommand{\sref}[1]{Section \ref{sub:#1}}
+\newcommand{\tlap}[1]{\text{$\tau$-$\mathrm{nlap}$}(#1)}
+\newcommand{\tmch}[1]{\text{$\tau$-$\mathrm{mch}$}(#1)}
+\newcommand{\umch}[1]{\text{$u$-$\mathrm{mch}$}(#1)}
+\newcommand{\ulap}[1]{\text{$u$-$\mathrm{nlap}$}(#1)}
+\newcommand{\tumch}[1]{\text{$(\tau,u)$-$\mathrm{mch}$}(#1)}
+\newcommand{\tulap}[1]{\text{$(\tau,u)$-$\mathrm{nlap}$}(#1)}
+\newcommand{\Umch}[1]{\text{$\Upsilon$-$\mathrm{mch}$}(#1)}
+\newcommand{\Ulap}[1]{\text{$\Upsilon$-$\mathrm{nlap}$}(#1)}
+\newcommand{\tref}[1]{Theorem \ref{theorem:#1}}
+\newcommand{\vartmch}[2]{\text{${#1}$-mch}(#2)}
+\newcommand{\vlap}[1]{\text{$v$-$\mathrm{nlap}$}(#1)}
+\newcommand{\vmch}[1]{\text{$v$-$\mathrm{mch}$}(#1)}
+\newcommand{\WE}{\upsilon}
+
+
+% newcommands to be used in regular mode
+
+
+\newcommand{\fig}[2]{\begin{figure}[ht]
+\centerline{\scalebox{.66}{\epsfig{file=#1.eps}}}
+\caption{#2}
+\label{figure:#1}
+\end{figure}}
+%\newcommand{\eref}[1]{(\ref{equation:#1})}
+%\newcommand{\sref}[1]{Section \ref{sub:#1}}
+%\newcommand{\tref}[1]{Theorem \ref{theorem:#1}}
+%\newcommand{\lref}[1]{Lemma \ref{lemma:#1}}
+%\newcommand{\fref}[1]{Figure \ref{figure:#1}}
+\title{PSM Project Status Report: 1}
+\author{
+Shane Bari\footnote{Supported by "out of pocket"}\\
+\small University of Wisconsin-Stout\\[-0.8ex]
+\small \texttt{baris0074@my.uwstout.edu}
+\and
+Russell Chamberlain\addtocounter{footnote}{0}\footnotemark[\value{footnote}]\\
+\small University of Wisconsin-Stout\\[-0.8ex]
+\small \texttt{chamberlainr0202.edu}
+\and
+Cassie Dale\addtocounter{footnote}{0}\footnotemark[\value{footnote}]\\
+\small University of Wisconsin-Stout\\[-0.8ex]
+\small \texttt{dalec0190@my.uwstout.edu}
+\and
+Jared Siverling\addtocounter{footnote}{0}\footnotemark[\value{footnote}]\\
+\small University of Wisconsin-Stout\\[-0.8ex]
+\small \texttt{siverlingj@uwstout.edu}
+\and
+Keith Wojciechowski\addtocounter{footnote}{0}\footnotemark[\value{footnote}]\\
+\small Department of Mathematics\\[-0.8ex]
+\small University of Wisconsin, Stout\\[-0.8ex]
+\small \texttt{wojciechowskik@uwstout.edu}
+%ls
+}
+
+\date{\small Submitted: 10/8/15;  Accepted: 10/8/15;
+ Published: Date 3.}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}\label{intro}
+Awesome intro
+
+\section{Non-overlapping words}\label{nonov}
+
+\section{Conclusion}\label{conclu}
+
+
+\begin{thebibliography}{20}
+
+\bibitem{KLRS} Sergey Kitaev, Jeffrey Liese, Jeffrey Remmel, Bruce E. Sagan, Rationality, Irrationality, and Wilf equivalence in generalized factor order. \emph{The Electronic Journal of Combinatorics},16(2)(2009), RZZ 26pgs.
+
+\bibitem{LLR} Thomas Langley, Jeffery Liese, and Jeffrey Remmel, Generating functions for Wilf equivalence under generalized factor order, submitted to Jounal of Integer Sequences.
+
+\bibitem{LLR*} Thomas Langley, Jeffery Liese, Jeffrey Remmel, Wilf equivalence for generalized factor orders modulo \emph{k}, preprint.
+
+\bibitem{NZ} John Noonan and Doron Zeilberger, The Goulden-Jackson Cluster Method: Extensions, Applications and Implementations,\emph{ Journal of Difference Equations and Applications 5 (1999), 355-377}.
+
+\end{thebibliography}
+\end{document}
+
