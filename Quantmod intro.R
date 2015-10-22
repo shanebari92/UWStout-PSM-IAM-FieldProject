@@ -16,3 +16,4 @@ has.Ad(GS)
 seriesHi(GS)
 
 # KJW has observed this file.
+# CMD has also observed this file.
