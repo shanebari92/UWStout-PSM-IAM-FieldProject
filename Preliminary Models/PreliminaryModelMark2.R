@@ -146,15 +146,29 @@ gPred <- function(x){
   # case of short term, check if data above or below GMA
   if(x[(len-1),1]>x[(len-1),2]){
     if(x[len,1]>x[(len-1),2]){
-      print("Prediction: wait")
+      print("Prediction from Short: wait")
     } else {
-      print("Prediction: sell")
+      print("Prediction from Short: sell")
     }
   } else {
     if(x[len,1]<x[(len-1),2]){
-      print("Prediction: wait")
+      print("Prediction from short: wait")
     } else {
-      print("Prediction: buy")
+      print("Prediction from short: buy")
+    }
+  }
+  # case of long term, check if data above or below GMA
+  if(x[(len-1),1]>x[(len-1),3]){
+    if(x[len,1]>x[(len-1),3]){
+      print("Prediction from long: wait")
+    } else {
+      print("Prediction from long: sell")
+    }
+  } else {
+    if(x[len,1]<x[(len-1),3]){
+      print("Prediction from long: wait")
+    } else {
+      print("Prediction from long: buy")
     }
   }
 }
