@@ -182,7 +182,7 @@ Simple rolling average is the rolling average utilizing arithmatic mean.\textsup
 
 SMA over an $N$-day period at day $t$:
 \[
-SMA(t) = \frac{\sum_{n=t-N}^{t}data[n]}{N}
+SMA(t) = \frac{\sum_{n=t-N}^{t}\text{data}[n]}{N}
 \]
 
 \subsection*{Exponential Moving Average: EMA}\label{EMA}
@@ -242,6 +242,8 @@ We will be investigating applying other moving averages after additional testing
 %\subsection*{Horizontal Estimators}
 %\This is more of a hypothesis then an actual topic from research. The idea being we can utuilize the intersetion of past horizontal line sigments with current data or moving averages.
 
+\end{document}
+
 \begin{thebibliography}{20}
 
 \bibitem{INV} http://www.investopedia.com/terms/s/sma.asp (10/29/2015)
@@ -249,5 +251,5 @@ We will be investigating applying other moving averages after additional testing
 \bibitem{WS} Diethelm Wurtz and Tobias Setz, ETH Zurich and Rmetrics Association Zurich May 12, 2014; https://cran.r-project.org/web/packages/timeSeries/vignettes/timeSeriesPlot.pdf (10/29/15)
 
 \end{thebibliography}
-\end{document}
+
 
