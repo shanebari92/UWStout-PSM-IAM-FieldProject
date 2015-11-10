@@ -46,6 +46,28 @@ WMA <- function(SMAweight, EMAweight, dataRaw, timePeriod){
    return (WMA)
 }
 
+###########################################################
+# Function: Plot Moving Averages (plotMAs)                #
+# Input: dataPlot, times and WMAs for both short and long #
+# Return: plots and null                                  #
+###########################################################
+plotMAs <- function(dataPlot, shortTerm, shortWMA, longTerm, longWMA){
+  # configure plots
+  par(bg='black', mfrow=c(2,1),
+      col.axis='white',col.lab='white',col.main='white',col.sub='white')
+  
+  plot(dataPlot,type='l',col='red',fg='white',
+       main=paste(shortTerm,'- day Weighted Moving Average'),
+       xlab='Day',ylab='Price')
+  lines(shortWMA,col='green')
+  
+  plot(dataPlot,type='l',col='red',fg='white',
+       main= paste(longTerm,'- day Weighted Moving Average'),
+       xlab='Day',ylab='Price')
+  lines(longWMA,col='green')
+  return()
+}
+
 ##########################################################
 # Function: Moving Averages All (mAvgsAll)               #
 # Input: x <- getSymbol matrix + nday + mday + "rest"    #
@@ -90,20 +112,9 @@ mAvgsAll <- function(x,n_day, m_day, weightSMA, weightEMA, open = TRUE, high = F
   } else {
     print ("check your true/false entrys")
   }
-  
-  # configure plots
-  par(bg='black', mfrow=c(2,1),
-      col.axis='white',col.lab='white',col.main='white',col.sub='white')
-  
-  plot(x[,k],type='l',col='red',fg='white',
-       main=paste(n_day,'- day Weighted Moving Average'),
-       xlab='Day',ylab='Price')
-  lines(WMA_n,col='green')
-  
-  plot(x[,k],type='l',col='red',fg='white',
-       main= paste(m_day,'- day Weighted Moving Average'),
-       xlab='Day',ylab='Price')
-  lines(WMA_m,col='green')
+
+  # plot the data and Moving Averages
+  plotMAs <- function(x[,k], n_data, WMA_n, m_data, WMA_m)
   
   #set up fillable matrix
   mAvgsAllData <- matrix(cbind(x[,k], WMA_n, WMA_m), ncol=3)
@@ -111,11 +122,11 @@ mAvgsAll <- function(x,n_day, m_day, weightSMA, weightEMA, open = TRUE, high = F
 }
 
 ####################################################
-# Function: Give Prediction (gPred)                #
+# Function: Give Prediction Data/MAs (gPredDataMA) #
 # Input: mAvgsAll(x) -- we'll use the data and GMA #
 # Return: "sell" "buy" "wait"                      #
 ####################################################
-gPred <- function(x){
+gPredDataMa <- function(x){
   len <- length(x[,1])
   # case of short term, check if data above or below GMA
   if(x[(len-1),1]>x[(len-1),2]){
@@ -147,4 +158,17 @@ gPred <- function(x){
   }
 }
 
-gPred(mAvgsAll(X,30,50,0,0))
+####################################################
+# Function: Give Prediction Crossover (gPredCross) #
+# Input: mAvgsAll(x) -- we'll use the data and GMA #
+# Return: "sell" "buy" "wait"                      #
+####################################################
+#gPredCross <- function(x){
+#  len <- length(x[,1])
+#  # case of short term, check if data above or below GMA
+#  if(x[(len-1),2]>x[(len-1),3]){
+#    
+#  }
+#}
+
+gPredDataMa(mAvgsAll(X,30,50,0,0))
