@@ -1,0 +1,5 @@
+Helpful Git Hub Shell Commands:
+"git status": grabs status of repo and account
+"git pull": does pull request
+"git commit": commits changes to repo
+"git commit -a": allows to merge files by ignoring lines
