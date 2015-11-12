@@ -1,0 +1,15 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdftex 2015.11.11)  11 NOV 2015 18:26
+entering extended mode
+**C:/Users/chamberlainr0202/Desktop/Status*Report*3/MyBiBTeX.bib
+("C:/Users/chamberlainr0202/Desktop/Status Report 3/MyBiBTeX.bib"
+! Undefined control sequence.
+l.39 	url = \url
+                {{https://cran.r-project.org/web/packages/quantmod/quantmod....
+
+? 
+! Emergency stop.
+l.39 	url = \url
+                {{https://cran.r-project.org/web/packages/quantmod/quantmod....
+End of file on the terminal!
+
+!  ==> Fatal error occurred, no output PDF file produced!

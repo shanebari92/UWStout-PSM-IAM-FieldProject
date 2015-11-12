@@ -1,0 +1,41 @@
+\begin{thebibliography}{1}
+
+\bibitem{JSZ}
+Shunrong~Shen Haomiao~Jiang and Tongda Zhang.
+\newblock Stock market forecasting using machine learning algorigthms.
+
+\bibitem{INV}
+Investopedia.
+
+\bibitem{KK}
+Kyoung jae Kim.
+\newblock Financial time series forecasting using support vector machines.
+
+\bibitem{QMOD}
+Joshua M.~Ulrich Jeffrey A.~Ryan and Wouter Thielen.
+\newblock Quantitative financial modelling framework, 2015.
+
+\bibitem{BRS}
+Neil F.~Riley Jerry K.~Bilbrey, Jr. and Caitlin~L. Sams.
+\newblock Short-term prediction of exchange traded funds (etfs) using logistic
+  regression generated client risk profiles.
+
+\bibitem{ANHS}
+Ismail~Hmeidi Khalid~Alkhatib, Hassan~Najadat and Mohammed K.~Ali Shatnawi.
+\newblock Stock price prediction using k-nearest neighbor (knn) algorithm.
+\newblock 3(3), March 2013.
+
+\bibitem{FORBES}
+Brian Solomon.
+\newblock It's official: Apple adds dr. dre with \$3 billion beats deal,
+  2014-05-28.
+
+\bibitem{TTR}
+Joshua Ulrich.
+\newblock Technical trading rules, 2015.
+
+\bibitem{MZ}
+Marijana Zekie.
+\newblock Neural network applications in stock market predictions.
+
+\end{thebibliography}

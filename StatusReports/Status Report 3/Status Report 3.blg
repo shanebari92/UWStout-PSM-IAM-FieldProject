@@ -1,0 +1,79 @@
+This is BibTeX, Version 0.99dThe top-level auxiliary file: Status Report 3.aux
+The style file: plain.bst
+Database file #1: MyBiBTeX.bib
+Warning--entry type for "QMOD" isn't style-file defined
+--line 35 of file MyBiBTeX.bib
+I was expecting a `,' or a `}'---line 38 of file MyBiBTeX.bib
+ :  year = 2015
+ :             -07-24,
+I'm skipping whatever remains of this entry
+Warning--entry type for "TTR" isn't style-file defined
+--line 43 of file MyBiBTeX.bib
+I was expecting a `,' or a `}'---line 46 of file MyBiBTeX.bib
+ :  year = 2015
+ :             -07-09,
+I'm skipping whatever remains of this entry
+Warning--entry type for "JSZ" isn't style-file defined
+--line 51 of file MyBiBTeX.bib
+I was expecting a `,' or a `}'---line 58 of file MyBiBTeX.bib
+ : 
+ : @electronic{MZ,
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "MZ" isn't style-file defined
+--line 58 of file MyBiBTeX.bib
+I was expecting a `,' or a `}'---line 65 of file MyBiBTeX.bib
+ : 
+ : @article{ANHS,
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 76 of file MyBiBTeX.bib
+ : 
+ : @electronic{KK,
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "KK" isn't style-file defined
+--line 76 of file MyBiBTeX.bib
+I was expecting a `,' or a `}'---line 85 of file MyBiBTeX.bib
+ : 
+ : @article{BRS,
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+I was expecting a `,' or a `}'---line 93 of file MyBiBTeX.bib
+ : 
+ : @electronic{INV,
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "INV" isn't style-file defined
+--line 93 of file MyBiBTeX.bib
+I was expecting a `,' or a `}'---line 99 of file MyBiBTeX.bib
+ : 
+ : @electronic{FORBES,
+(Error may have been on previous line)
+I'm skipping whatever remains of this entry
+Warning--entry type for "FORBES" isn't style-file defined
+--line 99 of file MyBiBTeX.bib
+Illegal end of database file---line 106 of file MyBiBTeX.bib
+ : }
+ :  
+I'm skipping whatever remains of this entry
+Name 1 in "Jeffrey A. Ryan, Joshua M. Ulrich, and Wouter Thielen" has a comma at the end for entry QMOD
+while executing---line 1049 of file plain.bst
+Name 1 in "Haomiao Jiang, Shunrong Shen, and Tongda Zhang" has a comma at the end for entry JSZ
+while executing---line 1049 of file plain.bst
+Name 1 in "Khalid Alkhatib, Hassan Najadat, Ismail Hmeidi, and Mohammed K. Ali Shatnawi" has a comma at the end for entry ANHS
+while executing---line 1049 of file plain.bst
+Name 1 in "Jerry K. Bilbrey, Jr., Neil F. Riley, and Caitlin L. Sams" has a comma at the end for entry BRS
+while executing---line 1049 of file plain.bst
+Name 1 in "Haomiao Jiang, Shunrong Shen, and Tongda Zhang" has a comma at the end for entry JSZ
+while executing---line 1090 of file plain.bst
+Name 1 in "Jeffrey A. Ryan, Joshua M. Ulrich, and Wouter Thielen" has a comma at the end for entry QMOD
+while executing---line 1090 of file plain.bst
+Name 1 in "Jerry K. Bilbrey, Jr., Neil F. Riley, and Caitlin L. Sams" has a comma at the end for entry BRS
+while executing---line 1090 of file plain.bst
+Warning--empty journal in BRS
+Warning--empty year in BRS
+Name 1 in "Khalid Alkhatib, Hassan Najadat, Ismail Hmeidi, and Mohammed K. Ali Shatnawi" has a comma at the end for entry ANHS
+while executing---line 1090 of file plain.bst
+Warning--empty journal in ANHS
+(There were 17 error messages)
