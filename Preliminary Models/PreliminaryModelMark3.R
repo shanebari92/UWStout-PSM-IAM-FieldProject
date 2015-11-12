@@ -16,7 +16,7 @@ X <- matrix(cbind(GS), ncol = 6)
 # Input: SMAweight, EMAweight, dataRaw , timeperiod      #
 # Return: WMA or GMA                                     #
 ##########################################################
-WMA <- function(SMAweight, EMAweight, dataRaw, timePeriod){
+WMA <- function(SMAweight=0, EMAweight=0, dataRaw, timePeriod){
   # calculate SMA and EMA
   SMA = SMA(dataRaw, timePeriod)
   EMA = EMA(dataRaw, timePeriod)
