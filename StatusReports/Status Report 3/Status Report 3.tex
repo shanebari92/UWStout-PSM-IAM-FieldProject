@@ -1,0 +1,295 @@
+\documentclass[11pt]{article}
+\usepackage{amsfonts,amssymb,amsmath,amsthm,epsfig,euscript,verbatim,graphicx, pdfpages}
+\setlength{\textwidth}{6.3in}
+\setlength{\textheight}{8.7in}
+\setlength{\topmargin}{0pt}
+\setlength{\headsep}{0pt}
+\setlength{\headheight}{0pt}
+\setlength{\oddsidemargin}{0pt}
+\setlength{\evensidemargin}{0pt}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{conjecture}{Conjecture}
+
+\def\mn{\makebox[1.1ex]{\rule[.58ex]{.71ex}{.15ex}}}
+
+\long\def\symbolfootnote[#1]#2{\begingroup
+\def\thefootnote{\fnsymbol{footnote}}\footnote[#1]{#2}\endgroup}
+
+% newcommands to be used in math mode
+
+%\newcommand{\coi}[1][\sigma]{\mathrm{coinv}(#1)}
+\newcommand{\coib}[1][\sigma]{\mathrm{coinv}_B(#1)}
+\newcommand{\com}[1][\sigma]{\mathrm{comaj}(#1)}
+\newcommand{\comb}[1][\sigma]{\mathrm{comaj}_B(#1)}
+%\DeclareMathOperator{\des}{\mathrm{des}}
+%\DeclareMathOperator{\maj}{\mathrm{maj}}
+\newcommand{\desb}[1][\sigma]{\mathrm{des}_B(#1)}
+%\newcommand{\epq}[1][t(x-y)]{\mathbf{e}_{p,q}^{#1}}
+\newcommand{\HF}{\xi}
+\newcommand{\HK}{\xi_B}
+%\newcommand{\inv}[1]{\mathrm{inv}(#1)}
+\newcommand{\invb}[1]{\mathrm{inv}_B(#1)}
+\newcommand{\la}{\lambda}
+\newcommand{\La}{\Lambda}
+\newcommand{\ris}[1]{\mathrm{ris}(#1)}
+\newcommand{\wris}[1]{\mathrm{wris}(#1)}
+\newcommand{\sris}[1]{\mathrm{sris}(#1)}
+\newcommand{\wmaj}[1][\gamma]{\mathrm{wmaj}(#1)}
+\newcommand{\wdes}[1]{\mathrm{wdes}(#1)}
+\newcommand{\sdes}[1]{\mathrm{sdes}(#1)}
+\newcommand{\des}[1]{\mathrm{des}(#1)}
+\newcommand{\levmaj}[1][\gamma]{\mathrm{levmaj}(#1)}
+\newcommand{\lev}[1][\gamma]{\mathrm{lev}(#1)}
+\DeclareMathOperator{\parts}{parts}
+\newcommand{\majb}[1][\sigma]{\mathrm{maj}_B(#1)}
+\newcommand{\mmaj}[1][\sigma^1,\dots,\sigma^m]{\mathrm{commaj}(#1)}
+\newcommand{\mdes}[1][\sigma^1,\dots,\sigma^m]{\mathrm{comdes}(#1)}
+\newcommand{\nega}[1][\sigma]{\mathrm{neg}(#1)}
+\newcommand{\nth}[1][n]{{#1}^{\mathrm{th}}}
+\newcommand{\ov}{\overline}
+\newcommand{\pos}[1][\sigma]{\mathrm{pos}(#1)}
+\newcommand{\qbinom}[2]{\genfrac{[}{]}{0pt}{}{#1}{#2}_{q}}
+\newcommand{\pqbinom}[2]{\genfrac{[}{]}{0pt}{}{#1}{#2}_{p,q}}
+\newcommand{\rbinom}[2]{\genfrac{[}{]}{0pt}{}{#1}{#2}_{r}}
+%\newcommand{\ris}[1][\sigma]{\mathrm{ris}(#1)}
+%\newcommand{\risb}[1][\sigma]{\mathrm{ris}_B(#1)}
+\newcommand{\sg}{\sigma}
+\newcommand{\ep}{\epsilon}
+\newcommand{\ga}{\gamma}
+\newcommand{\Ta}{\Theta}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Pos}{\mathbb{P}}
+\newcommand{\Ev}{\mathbb{E}}
+\newcommand{\Odd}{\mathbb{O}}
+\newcommand{\sP}{s\mathbb{P}}
+\newcommand{\UD}{U\mbox{-}D}
+\newcommand{\NDD}{ND\mbox{-}D}
+\newcommand{\UNU}{U\mbox{-}NU}
+\newcommand{\ud}{u\mbox{-}d}
+\newcommand{\ndd}{nd\mbox{-}d}
+\newcommand{\unu}{u\mbox{-}nu}
+\def\dd{{\textrm d}}
+%\def\qexp{{\mathbf{e}}_q}
+%\def\pqexp{{\mathbf{e}}_{p,q}}
+
+
+\newcommand{\al}{\alpha}
+\newcommand{\cref}[1]{Corollary \ref{corollary:#1}}
+\newcommand{\cmch}[1][\sg^1,\dots,\sg^m]{\text{$\tau$-$\mathrm{commch}$}(#1)}
+\newcommand{\clap}[1][\sg^1,\dots,\sg^m]{\text{$\tau$-$\mathrm{comnlap}$}(#1)}
+\newcommand{\cvlap}[1][w,y]{\text{$v$-$\mathrm{comnlap}$}(#1)}
+%\newcommand{\des}[1]{\mathrm{des}(#1)}
+%\newcommand{\ep}[1]{\exp \left( #1 \right)}
+\newcommand{\qexp}[1]{\exp_{q} \left( #1 \right)}
+\newcommand{\pqexp}[1]{\exp_{q,p} \left( #1 \right)}
+\newcommand{\Epq}[1]{\mathrm{Exp}_{q} \left( #1 \right)}
+\newcommand{\eref}[1]{\eqref{equation:#1}}
+\newcommand{\FA}{f}
+\newcommand{\FAq}{f_q}
+\newcommand{\FAm}{f_m}
+\newcommand{\FB}{g}
+\newcommand{\FBb}{g_2}
+%\newcommand{\fig}[1]{\vspace{1ex} \begin{center} \input{#1.pstex_t} \end{center%} \vspace{1ex}}
+\newcommand{\Floor}[1][n/2]{\left \lfloor #1 \right \rfloor}
+\newcommand{\HA}{\xi}
+\newcommand{\HAq}{\xi_q}
+\newcommand{\HAm}{\xi_m}
+\newcommand{\HB}{\varphi}
+\newcommand{\HC}{\eta}
+\newcommand{\HCb}{\eta_2}
+\newcommand{\HL}{\vartheta}
+\newcommand{\im}{i}
+\newcommand{\inv}[1]{\mathrm{inv}(#1)}
+\newcommand{\coinv}[1]{\mathrm{coinv}(#1)}
+%\newcommand{\La}{\Lambda}
+%\newcommand{\la}{\lambda}
+\newcommand{\lref}[1]{Lemma \ref{lemma:#1}}
+%\newcommand{\nth}[1][n]{{#1}^{\mathrm{th}}}
+\newcommand{\qbin}[3]{\genfrac{[}{]}{0pt}{}{#1}{#2}_{#3}}
+\newcommand{\red}[1]{\mathrm{red}(#1)}
+%\newcommand{\sg}{\sigma}
+\newcommand{\sm}[2]{\sum_{#1 = #2}^{\infty}}
+\newcommand{\sref}[1]{Section \ref{sub:#1}}
+\newcommand{\tlap}[1]{\text{$\tau$-$\mathrm{nlap}$}(#1)}
+\newcommand{\tmch}[1]{\text{$\tau$-$\mathrm{mch}$}(#1)}
+\newcommand{\umch}[1]{\text{$u$-$\mathrm{mch}$}(#1)}
+\newcommand{\ulap}[1]{\text{$u$-$\mathrm{nlap}$}(#1)}
+\newcommand{\tumch}[1]{\text{$(\tau,u)$-$\mathrm{mch}$}(#1)}
+\newcommand{\tulap}[1]{\text{$(\tau,u)$-$\mathrm{nlap}$}(#1)}
+\newcommand{\Umch}[1]{\text{$\Upsilon$-$\mathrm{mch}$}(#1)}
+\newcommand{\Ulap}[1]{\text{$\Upsilon$-$\mathrm{nlap}$}(#1)}
+\newcommand{\tref}[1]{Theorem \ref{theorem:#1}}
+\newcommand{\vartmch}[2]{\text{${#1}$-mch}(#2)}
+\newcommand{\vlap}[1]{\text{$v$-$\mathrm{nlap}$}(#1)}
+\newcommand{\vmch}[1]{\text{$v$-$\mathrm{mch}$}(#1)}
+\newcommand{\WE}{\upsilon}
+\newcommand*\apos{\textsc{\char13}}
+
+
+% newcommands to be used in regular mode
+
+
+\newcommand{\fig}[2]{\begin{figure}[ht]
+\centerline{\scalebox{.66}{\epsfig{file=#1.eps}}}
+\caption{#2}
+\label{figure:#1}
+\end{figure}}
+%\newcommand{\eref}[1]{(\ref{equation:#1})}
+%\newcommand{\sref}[1]{Section \ref{sub:#1}}
+%\newcommand{\tref}[1]{Theorem \ref{theorem:#1}}
+%\newcommand{\lref}[1]{Lemma \ref{lemma:#1}}
+%\newcommand{\fref}[1]{Figure \ref{figure:#1}}
+\title{PSM Project Status Report: 3}
+\author{
+Shane Bari\\
+\small University of Wisconsin-Stout\\[-0.8ex]
+\small \texttt{baris0074@my.uwstout.edu}
+\and
+Russell Chamberlain\\
+\small University of Wisconsin-Stout\\[-0.8ex]
+\small \texttt{chamberlainr0202.my.uwstout.edu}
+\and
+Cassie Dale\\
+\small University of Wisconsin-Stout\\[-0.8ex]
+\small \texttt{dalec0190@my.uwstout.edu}
+\and
+Jared Siverling\\
+\small University of Wisconsin-Stout\\[-0.8ex]
+\small \texttt{siverlingj@uwstout.edu}
+\and
+Keith Wojciechowski\\
+\small Department of Mathematics\\[-0.8ex]
+\small University of Wisconsin, Stout\\[-0.8ex]
+\small \texttt{wojciechowskik@uwstout.edu}
+%ls
+}
+
+\date{\small Submitted: 11/10/15;  Accepted: Date 2;  Published: Date 3.}
+
+\begin{document}
+\maketitle
+
+\abstract{\noindent The following is a summary of work done from 10/30/15 until 11/10/15 as well as future plans for the project and special considerations/questions. Information from previous reports is also included where needed for understanding of current and future pursuits.}
+
+
+\section*{\hspace{-.5cm} Preliminary Model}\label{PM}
+There is currently a working predictive model for the project. It is preliminary and basic in that it compares data to a moving average. The model does two of these comparisons and provides one of three suggestions: buy, sell, or hold.
+
+\subsection*{Model Input and Output}\label{PMWID}
+
+The model is set of functions that perform specified tasks outlined in this section. First, the user sets the inputs for the model:
+\begin{enumerate}
+	\item data is input from Yahoo Finance using the quantmod package in R--explained below
+	\item downloaded data is selected: open, closing, high, low, or adjusted
+	\item user may set two time periods for moving averages
+	\item user provides weights for Simple Moving Average (SMA) or Exponential Moving Average (EMA) -- default is General Moving Average (GMA)--explained below
+\end{enumerate}
+
+\noindent Once the above inputs are set, the function
+\begin{enumerate}
+	\item calculates the desired moving average with the preferred time limit
+	\item prints plots showing the data and moving average
+	\item runs a prediction function that compares the position of the newest data point to the previous moving average and returns a suggestion: buy, sell, or hold
+\end{enumerate}
+
+\subsection*{Relative R Packages}\label{RRP}
+The Quantmod package used in an R environment provides a number of benefits in terms of importing, manipulating, and analyzing stock market data. Quantmod is free to access and allows us to import data from a number of sources including Yahoo, Google, and FRED as well as local data sources such as an SQL database or .csv file. Since quantmod is available on the Comprehensive R Archive Network (CRAN), extensive documentation and examples are available.\textsuperscript{\cite{QMOD}}
+
+Technical Trading Rules (TTR) is another package available to us and is designed to enhance quantmod by offering specific indicator functions to construct datasets to be used for prediction. A full list of functions available in TTR is given in \cite{TTR}. 
+
+\subsection*{Explanation of Plots}\label{plots}
+Plots printed from the model will show the data as a red line and the selected moving average as a green line. The titles used in the plots will change based on the time periods chosen for consideration.
+
+\subsection*{The Prediction Function}\label{quant}
+The current prediction relates the most recent point in the data with the previous value of the chosen moving average. If the data was above the moving average, but dropped below with the newest point, the prediction function will return a suggestion to sell since the stock price is falling. If the data was below the moving average, but rose above with the newest point, the prediction function will return a suggestion to buy since the stock price is increasing. If there is no change in the data\apos s position with respect to the previous moving average, then the prediction function will return a suggestion to wait since nothing significant has occurred in the data that reflects a meaningful increase or decrease in the stock\apos s value.
+
+\subsection*{General Moving Average}\label{GMA}
+In deciding when to buy or sell a specific stock, it is important to know as quickly as possible when the price crosses a certain threshold. The preliminary model investigates the use of moving averages to indicate whether a stock price will go up or down relative to the overall trend.
+
+Given the behavior of a specific stock over the days being averaged, one type of moving average will be closer to the data than any other type. A General Moving Average (GMA) dataset is constructed using all available moving averages (currently only SMA and EMA) and taking the one closest to the actual data. Taken over a long period (100-200 days), the GMA allows us to account for past data and achieve a close approximation of the data as a whole. 
+
+\subsection*{Weighted Moving Averages}\label{WMA}
+The model allows the user to select a moving average of their choice among SMA, EMA, GMA, or a weighted combination of SMA and EMA. This allows the user greater control in choosing which moving average is valued more in the prediction calculation. For a prediction using SMA, the user gives SMA a weight of one and EMA a weight of zero. Likewise, if the user desires to use only EMA for a prediction, they give SMA a weight of zero and EMA a weight of one. If the user wishes to use GMA, they need only weight EMA and SMA to zero, the program will recognize this as a command for calculating and utilizing GMA. Besides the GMA case, if the sum of weights between SMA and EMA do not sum to one, the model will return a message prompting the user to look at their weighting values.
+
+\subsection*{Short Comings of Model}\label{SCM}
+The model is as basic as we could make it while still functioning. As such, it has short comings. The model currently only looks at one data set and compares that to a moving average. This is an important distinction as we will be implementing a prediction function in the weeks to come that compares two moving averages against each other.
+
+The model also does not consider any outside influences and is solely making a prediction based on previous data. This means that outside forces are not considered by the model, currently. So, if something catastrophic happens in a market or a new law is passed, the model will not take these into consideration.
+
+The model only uses SMA and EMA as moving averages. It does give more functionality by allowing weights or using SMA and EMA to calculate GMA, but it still only uses these two moving averages for the prediction. We have been researching additional moving averages to add to the model if we can show a significant improvement to the model from their addition.
+
+The model is currently set to daily rates and cannot be used for weekly or monthly rates in its current condition. Though, it is believed that simply modifications can be made to the primary function in the model as well as how data is pulled form Yahoo Finance to resolve this short coming.
+
+
+\section*{\hspace{-.5cm} Future Plans and Options}\label{FP}
+The preliminary model is a solid foundation for the final model that will meet the goals of the project. We are at a position where additional indicators and moving averages are being considered. There are multiple indicators and moving averages available for use from the TTR package. There are also additional options not offered by TTR that can be considered.
+
+\subsection*{Potential Options in TTR}\label{PITTR}
+In analyzing the behavior of a stock price, it is necessary to use technical indicators derived from price activity to predict future price levels or direction from past patterns in the data. Some indicators available in with TTR are:\textsuperscript{\cite{TTR}}
+\begin{itemize}
+\item \textbf{Rate of Change (ROC):} the percentage of change between the most recent price and the price n days ago. ROC is effectively the slope of the line connecting two data points and draws attention to the speed at which an asset changes price.
+\item \textbf{Relative Strength Index (RSI):} compares the magnitude of recent price increase to recent price decreases. RSI ranges from 0 to 100 and indicates whether or not a stock is becoming over- or undervalued. Large surges or drops in the price of an asset will affect the RSI.
+\item \textbf{Moving Averages:}
+\begin{itemize}
+\item \textbf{Double EMA:} This moving average includes both single and double EMA’s in order to reduce the lag time compared to traditional moving averages; since DEMA is faster to respond than EMA it can help identify price direction reversals.
+\item \textbf{Triple Exponential (TEMA):} Features a composite of single, double, and triple EMA’s to “smooth” the data by filtering out large price variations. TEMA is useful in highlighting strong trends but is limited with short-term fluctuations.
+\item \textbf{Linear Weighted (LWMA):} Similar to simple moving average however LWMA gives higher weight to recent data.
+\item \textbf{Kaufman’s Adaptive (KAMA):} Designed to account for statistical noise within the data by closely following prices when changes in the data are small and adjusting accordingly when price swings are large.
+\item \textbf{Hull (HMA):} Extremely fast moving average, improves smoothing and eliminates lag nearly entirely.
+\item \textbf{Jurik (JMA):} Similar to HMA, this moving average attempts to get rid of any lag while producing a smooth plot of the data.
+\item \textbf{Fractal Adaptive (FRAMA):} An improvement on EMA that attempts to smooth the indicator by taking into account the amount of movement over a greater time period relative to the swing at a smaller time interval.
+\item \textbf{Log-Normal Adaptive (LAMA):} Similar to FRAMA, relates the volatility index to indicate high volatility.
+\item \textbf{Exponentially Weighted (EWMA):} Uses a smoothing parameter to give recent data greater weight on the variance of the data.
+\end{itemize}
+\end{itemize}
+
+\subsection*{Options Outside of TTR}\label{OOTTR}
+There are a multitude of options that are not included in the TTR package but can still be considered for addition to the model by adding additional packages. Some of these options are as follows:
+\begin{itemize}
+\item \textbf{Money Flow Index (MFI):} uses a stock\apos s price and volume to predict the reliability of the current trend. Though not required, it is often suggested that a two week period is used. A leading indicator of a change in the current trend is when the MFI moves in the opposite direction as the price.
+\item \textbf{Moving Average Convergence Divergence (MACD):} compares the relationship between two moving averages of prices. This is calculated by subtracting the 26 day EMA from the 12 day EMA. A 9 day EMA, called the ``signal line” is often plotted on top of the MACD and acts as a trigger for buy and sell signals.
+\item \textbf{Stochastic Oscillator:} compares a security’s closing price to its price range over a given time period. The oscillator’s sensitivity to market movements can be reduced by adjusting the time period or by taking a moving average of the result. 
+\item \textbf{Bollinger Bands:} These are bands around an EMA (above and below), which are standard deviations of the stock. The bands are calculated by adding a standard deviation to get the one above and subtracting one standard deviation to get the one below. 
+\item \textbf{Triple Exponential Average (TRIX):} is a momentum (oscillator) indicator that shows percentage change in a TEMA and is designed to filter out price movements that are considered insignificant or unimportant, also known as market noise. Produces signals similar to the MACD but is smoother due to the something of the TEMA. TRIX is said to be one of the best reversal and momentum indicators.\textsuperscript{\cite{INV}}
+\item \textbf{Directional Movement Index (DMI):} is comprised of a ration of EMAs of the upward price movements (EMAUP), downward price movements (EMADOWN), and the true range of prices (EMATR) and is on a scale from 0 to 100. DMI can gauge both buying and selling pressures and shows which is dominant. Unfortunately, crossovers of DMI lines are often unreliable because of frequent false signals produced by the index when volatility is low or late signals when volatility is high.
+\item \textbf{Average Directional Index (ADX):} is an indicator used as an objective value for the strength of a trend and qualifies the strength as a magnitude, regardless of direction. This is said to be the ultimate trend indicator but only works as a strength indicator and not as a trigger.
+\item \textbf{Aroon Indicator:} is used to measure if a security is in a trend as well as the magnitude of the security. The Aroon Indicator can also be used to identify when a new trend is about to begin.
+\item \textbf{Percentage Price Oscillator (PPO):} is a momentum oscillator that shows the relationship between two MA’s and is like MACD, since it uses a 26 and 9 day EMA, but is easier to read.
+\end{itemize}
+
+\subsection*{Learning Algorithm}\label{FP}
+Machine Learning (ML) algorithms recognize patterns in past data generate predictive models and have been used in financial time series and stock market applications with moderate-to-high levels of accuracy.\textsuperscript{\cite{JSZ}\cite{MZ}\cite{ANHS}\cite{KK}\cite{BRS}} Examples of ML algorithms include logistic regression, support vector machines, and artificial neural networks; future research will be required to identify the ideal algorithm/combination of algorithms.
+
+As mentioned above, the quantmod and TTR packages will help us to generate various features to create a dataset. Our learning algorithm(s) will then be used on this dataset to create a predictive model. 
+
+\section*{\hspace{-.5cm} Concerns and Questions}\label{CQ}
+\subsection*{Company Mergers}\label{CMerg}
+It is common investing knowledge that during a merger of two companies, there is usually a predictable short-term effect on the stock price of both companies. (In general, the acquiring company's stock will fall while the target company's stock will rise.)\textsuperscript{\cite{INV}}
+
+However, there cases where this is not true. For example, when Apple merged with Beats Electronic for \$3 billion, including \$2.6 billion cash up front, Apple stock continued to rise and has remained up over 17\% since April 23rd. Shares have crested \$624, the highest mark Apple has traded at since October 2012.\textsuperscript{\cite{FORBES}}
+
+Why does Apple seem immune to the common knowledge of mergers in stock prices? Is it that the company is immune, or was this one specific transaction immune?
+
+\subsection*{User Preference}\label{UP}
+To ensure the model meets the needs of the customer, customer expectations and preferences will need to be gathered, considered, and implemented into the model. Knowing the customer's preferred indicators and trusted moving averages would be beneficial towards this end; however, understanding proprietary information, the model can continue to include multiple moving averages as well as weighting options, so trade secrets need not be exposed.
+
+
+\bibliography{MyBiBTeX}
+\bibliographystyle{plain}
+
+%\begin{thebibliography}{20}
+%\bibitem{QMOD} quantmod package manuel; https://cran.r-project.org/web/packages/quantmod/quantmod.pdf (11/10/2015)
+%\bibitem{TRR} TTR package manual: https://cran.r-project.org/web/packages/TTR/TTR.pdf (11/10/2015)
+%\bibitem{JSZ} Haomiao Jiang, Shunrong Shen, and Tongda Zhang; ``Stock Market Forecasting Using Machine Learning Algorigthms";  %http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.278.6139&rep=rep1&type=pdf  (11/10/2015)
+%\bibitem{MZ}  Marijana Zekie; ``Neural Network Applications in Stock Market Predictions";  %http://www.efos.unios.hr/arhiva/dokumenti/mzekic_varazdin98.pdf  (11/10/2015)
+%\bibitem{ANHS} Khalid Alkhatib, Hassan Najadat, Ismail Hmeidi, Mohammed K. Ali Shatnawi; ``Stock Price Prediction Using K-Nearest Neighbor (kNN) Algorithm" ; \textit{International Journal of Business, Humanities and Technology}; Vol. 3 No. 3; March 2013; %http://www.ijbhtnet.com/journals/Vol_3_No_3_March_2013/4.pdf  (11/10/2015)
+%\bibitem{KK} Kyoung-jae Kim; ``Financial time series forecasting using support vector machines"; Published: \textit{Neurocomputing 55 (2003) 307–319} March 2003 http://www.cse.ust.hk/~leichen/courses/comp630p/collection/reference-1-23.pdf  (11/10/2015)
+%\bibitem{BRS} Jerry K. Bilbrey, Jr., Neil F. Riley, and Caitlin L. Sams; ``Short-term prediction of exchange traded funds (ETFs) using logistic regression generated client risk profiles"; \textit{Journal of Finance and Accountancy } http://www.aabri.com/manuscripts/131609.pdf  (11/10/2015)
+%\bibitem{INV} http://www.investopedia.com/terms/s/sma.asp (11/10/2015)
+%\end{thebibliography}
+
+\end{document}
+

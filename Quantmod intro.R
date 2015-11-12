@@ -15,4 +15,15 @@ has.Ad(GS)
 #where and what was the high point?
 seriesHi(GS)
 
+<<<<<<< HEAD
 #shane's comment
+=======
+# KJW has observed this file.
+<<<<<<< HEAD
+# CMD has also observed this file.
+=======
+# RMC has made an attempt to comment
+>>>>>>> origin/master
+
+#Shane's comment
+>>>>>>> refs/remotes/keithwoj/master
