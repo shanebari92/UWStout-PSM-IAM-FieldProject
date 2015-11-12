@@ -167,21 +167,33 @@ Keith Wojciechowski\\
 %ls
 }
 
-\date{\small Submitted: 11/10/15;  Accepted: Date 2;  Published: Date 3.}
+\date{\small Submitted: 11/11/15;  Accepted: 11/12/15;  Published: Date 3.}
 
 \begin{document}
 \maketitle
 
-\abstract{The following is a summary of work done from 10/30/15 until 11/10/15 as well as future plans for the project and special considerations/questions. Information from previous reports is also included where needed for understanding of current and future pursuits.}
+\abstract{\noindent The following is a summary of work done from 10/30/15 until 11/10/15 as well as future plans for the project and special considerations/questions. Information from previous reports is also included where needed for understanding of current and future pursuits.}
 
 
 \section*{\hspace{-.5cm} Preliminary Model}\label{PM}
-There is currently a working model for the project. It is the preliminary model and is a basic model that compares data to a moving average. The model does two of these comparisons and provides one of three suggestions: buy, sell, or wait.
+There is currently a working predictive model for the project. It is preliminary and basic in that it compares data to a moving average. The model does two of these comparisons and provides one of three suggestions: buy, sell, or hold.
 
-\subsection*{Process of Model: What It Does}\label{PMWID}
-The current model takes in data from Yahoo Finance using the quantmod package in R--explained below. Once the data has been taken, it is used as input for a function that allows the user to choose which data from the downloaded data to use: open, closing, high, low, or adjusted. The function also allows the user to set two time periods for moving averages as well as give different weights for Simple Moving Average (SMA) or Exponential Moving Average (EMA). The user can also choose to not give a weight for SMA or EMA and the program will calculate the General Moving Average (GMA)--explained below.
+\subsection*{Model Input and Output}\label{PMWID}
 
-Once the commands and input have been given, the function calculates the desired moving average with the preferred time limit. The model then prints plots showing the data and moving average. Finally, the model runs a prediction function that compares the position of the newest data point to the previous moving average and returns a suggestion: buy, sell, or wait.
+The model is set of functions that perform specified tasks outlined in this section. First, the user sets the inputs for the model:
+\begin{enumerate}
+	\item data is input from Yahoo Finance using the quantmod package in R--explained below
+	\item downloaded data is selected: open, closing, high, low, or adjusted
+	\item user may set two time periods for moving averages
+	\item user provides weights for Simple Moving Average (SMA) or Exponential Moving Average (EMA) -- default is General Moving Average (GMA)--explained below
+\end{enumerate}
+
+\noindent Once the above inputs are set, the function
+\begin{enumerate}
+	\item calculates the desired moving average with the preferred time limit
+	\item prints plots showing the data and moving average
+	\item runs a prediction function that compares the position of the newest data point to the previous moving average and returns a suggestion: buy, sell, or hold
+\end{enumerate}
 
 \subsection*{Relative R Packages}\label{RRP}
 The Quantmod package used in an R environment provides a number of benefits in terms of importing, manipulating, and analyzing stock market data. Quantmod is free to access and allows us to import data from a number of sources including Yahoo, Google, and FRED as well as local data sources such as an SQL database or .csv file. Since quantmod is available on the Comprehensive R Archive Network (CRAN), extensive documentation and examples are available.\textsuperscript{\cite{QMOD}}
