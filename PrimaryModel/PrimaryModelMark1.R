@@ -126,6 +126,16 @@ mAvgsAll <- function(x,n_day, m_day, weightSMA, weightEMA, open = TRUE, high = F
 # Input: mAvgsAll(x) -- we'll use the data and GMA #
 # Return: "sell" "buy" "wait"                      #
 ####################################################
+
+# we might want to change the argument for this function
+# since X is already defined as the original OHLC data matrix,
+# using lowercase x could be confusing.
+#
+# It wants data of the form [price,WMA_n,WMA_m]; maybe use something like:
+# gPredDataMA = function(WMAdata){...}
+# the same can be said of gPredDataMABuy, gPredDataMASell, gPredCross, and fProfit
+# -Shane
+
 gPredDataMA <- function(x){
   len <- length(x[,1])
   # case of short term, check if data above or below GMA
