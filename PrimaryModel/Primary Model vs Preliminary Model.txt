@@ -1,0 +1,19 @@
+Primary Model vs Preliminary Model
+
+The primary builds off the preliminary model and includes
+the follwing additional features:
+-profitability function (based on MA|data)
+-predict buy function (based on MA|data)
+-predict sell function (based on MA|data)
+
+There have also been changes in the naming of some variables
+and some functions from the originals in the preliminary
+model.
+
+The following will be added to the Primary Model:
+-predict function (based on MA|MA)
+-predict function (based on least squares)
+-profitability function (based on MA|MA)
+-profitability function (baseed on least squares)
+
+Russ
