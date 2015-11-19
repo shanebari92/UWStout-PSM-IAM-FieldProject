@@ -114,7 +114,12 @@ mAvgsAll <- function(x,n_day, m_day, weightSMA, weightEMA, open = TRUE, high = F
   }
 
   # plot the data and Moving Averages
-  plotMAs <- function(x[,k], n_data, WMA_n, m_data, WMA_m)
+  
+  # it wasn't happy about this function
+  # so it was removed
+  # -Shane
+  
+  #plotMAs <- function(x[,k], n_data, WMA_n, m_data, WMA_m)
   
   #set up fillable matrix
   mAvgsAllData <- matrix(cbind(x[,k], WMA_n, WMA_m), ncol=3)
@@ -242,11 +247,16 @@ fProfit <- function(x, timeShort, timeLong){
    
    for (i in (timeShort+1):length(x[,1])){
      xShort <- x[-(i+1):-length(x[,1]),]
-     print("...")
-     print(gPredDataMABuy(xShort))
-     print(gPredDataMASell(xShort))
-     print(i==length(x[,1]))
-     print("...")
+     
+     # we don't need to print these for every data point
+     # -Shane
+    
+     #print("...")
+     #print(gPredDataMABuy(xShort))
+     #print(gPredDataMASell(xShort))
+     #print(i==length(x[,1]))
+     #print("...")
+     
      if(gPredDataMABuy(xShort)){
        buyAmt  = x[i,1]
        # keep track of total amount spent, only changes with a buy
