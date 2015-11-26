@@ -52,10 +52,11 @@ WMA <- function(SMAweight=0, EMAweight=0, dataRaw, timePeriod){
 # Return: plots and null                                  #
 ###########################################################
 plotMAs <- function(dataPlot, shortTerm, shortWMA, longTerm, longWMA){
-  # configure plots
+  # configure plots  
   par(bg='black', mfrow=c(2,1),
       col.axis='white',col.lab='white',col.main='white',col.sub='white')
   
+  # set up and plot
   plot(dataPlot,type='l',col='red',fg='white',
        main=paste(shortTerm,'- day Weighted Moving Average'),
        xlab='Day',ylab='Price')
@@ -65,6 +66,7 @@ plotMAs <- function(dataPlot, shortTerm, shortWMA, longTerm, longWMA){
        main= paste(longTerm,'- day Weighted Moving Average'),
        xlab='Day',ylab='Price')
   lines(longWMA,col='green')
+  
   return()
 }
 
@@ -113,13 +115,8 @@ mAvgsAll <- function(x,n_day, m_day, weightSMA, weightEMA, open = TRUE, high = F
     print ("check your true/false entrys")
   }
 
-  # plot the data and Moving Averages
-  
-  # it wasn't happy about this function
-  # so it was removed
-  # -Shane
-  
-  #plotMAs <- function(x[,k], n_data, WMA_n, m_data, WMA_m)
+  # plot the data and Moving Averages  
+  plotMAs <- (x[,k], n_day, WMA_n, m_day, WMA_m)
   
   #set up fillable matrix
   mAvgsAllData <- matrix(cbind(x[,k], WMA_n, WMA_m), ncol=3)
@@ -140,6 +137,12 @@ mAvgsAll <- function(x,n_day, m_day, weightSMA, weightEMA, open = TRUE, high = F
 # gPredDataMA = function(WMAdata){...}
 # the same can be said of gPredDataMABuy, gPredDataMASell, gPredCross, and fProfit
 # -Shane
+#
+# Shane, this sounds like a good idea. This will also help us later on when we
+# are looking back at the code and trying to figure out what we did and why
+# we did. Let's plan on changing this the next time we meet. Otherwise, I may
+# get to it over Thanksgiving break.
+# -Russ
 
 gPredDataMA <- function(x){
   len <- length(x[,1])
@@ -248,15 +251,6 @@ fProfit <- function(x, timeShort, timeLong){
    for (i in (timeShort+1):length(x[,1])){
      xShort <- x[-(i+1):-length(x[,1]),]
      
-     # we don't need to print these for every data point
-     # -Shane
-    
-     #print("...")
-     #print(gPredDataMABuy(xShort))
-     #print(gPredDataMASell(xShort))
-     #print(i==length(x[,1]))
-     #print("...")
-     
      if(gPredDataMABuy(xShort)){
        buyAmt  = x[i,1]
        # keep track of total amount spent, only changes with a buy
@@ -282,17 +276,54 @@ fProfit <- function(x, timeShort, timeLong){
    message("Total Spent: ", totalSpent)
    message("Total Profit: ", totalProfit)
    message("Relative Profit (ROI): ", round(((totalProfit/totalSpent)*100),2), " %")
-   print(x[-1:-(length(x[,1])-1),])
-   print(length(x[,1]))
+   
+   # clear variables and start again, we may want to consider changing to a single MA function style
+   # insted of the two MA function style we started with
+   # -Russ
+   
+   buyAmt      = 0 # amount a unit of stock was purchased at
+   sellAmt     = 0 # amount a unit of stock sold for
+   profit      = 0 # money made or lost
+   totalProfit = 0 # tracks total profit
+   totalSpent  = 0 # tracks toatl buy amounts
+   
+   for (i in (timeLong+1):length(x[,1])){
+     xLong <- x[-(i+1):-length(x[,1]),]
+     
+     if(gPredDataMABuy(xLong)){
+       buyAmt  = x[i,1]
+       # keep track of total amount spent, only changes with a buy
+       totalSpent  = buyAmt + totalSpent
+     } else if(gPredDataMASell(xLong)){
+       sellAmt = x[i,1]
+       profit  = sellAmt-buyAmt
+       # keep track of total profit, only changes with a sell
+       totalProfit = profit + totalProfit 
+     } else if(i == length(x[,1])){
+       # if we are still waiting to sell when period ends, we sell for current amount
+       if (x[i,3]<buyAmt){ ###SPECIAL CONDITION FOR LONG###
+         totalProfit = totalProfit + (x[i,1]-buyAmt)
+       } else{
+         # nothing is needed as amount has been sold
+       }
+       message("NOTE: final balance sold to calculate ROI")
+     } else{
+       # nothing else needs to happen because we are waiting for a sell prediction
+     }
+   }
+   message(timeLong,"-day TOTALS:")
+   message("Total Spent: ", totalSpent)
+   message("Total Profit: ", totalProfit)
+   message("Relative Profit (ROI): ", round(((totalProfit/totalSpent)*100),2), " %")
+   
+   
+   # for testing the end of matrix
+   #print(x[-1:-(length(x[,1])-1),])
+   #print(length(x[,1]))
 }
 
 
-fProfit(mAvgsAll(X,100,100,0,0),100,100)
-gPredDataMa(mAvgsAll(X,30,50,0,0))
+fProfit(mAvgsAll(X,45,100,.1,.9),45,100)
+gPredDataMA(mAvgsAll(X,30,50,0,0))
 
-for (i in 2:5){
-  print(i)
-  if (i==5){
-    print("bingo")
-  }
-}
+
