@@ -17,3 +17,7 @@ The following will be added to the Primary Model:
 -profitability function (baseed on least squares)
 
 Russ
+
+UPDATE:
+The following has been added:
+-predict function (based on MA|MA) (Added:11/30/15)
