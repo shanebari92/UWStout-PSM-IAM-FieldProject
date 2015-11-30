@@ -116,7 +116,7 @@ mAvgsAll <- function(x,n_day, m_day, weightSMA, weightEMA, open = TRUE, high = F
   }
 
   # plot the data and Moving Averages  
-  plotMAs <- (x[,k], n_day, WMA_n, m_day, WMA_m)
+  plotMAs(x[,k], n_day, WMA_n, m_day, WMA_m)
   
   #set up fillable matrix
   mAvgsAllData <- matrix(cbind(x[,k], WMA_n, WMA_m), ncol=3)
@@ -224,16 +224,26 @@ gPredDataMASell <- function(x){
 
 ####################################################
 # Function: Give Prediction Crossover (gPredCross) #
-# Input: mAvgsAll(x) -- we'll use the data and GMA #
+# Input: mAvgsAll(x) -- we'll use the data and WMA #
 # Return: "sell" "buy" "wait"                      #
 ####################################################
-#gPredCross <- function(x){
-#  len <- length(x[,1])
-#  # case of short term, check if data above or below GMA
-#  if(x[(len-1),2]>x[(len-1),3]){
-#    
-#  }
-#}
+gPredCrossMA <- function(x){
+  len <- length(x[,1])
+  # check if short or long peroid is greater
+  if(x[(len-1),2]>x[(len-1),3]){ #condition for short period being greater
+    if(x[len,2]>x[len,3]){ #nothing has changed, so wait
+      print("Prediction from MA Cross Over: wait")
+    } else { #shortMA has dipped below longMA, so sell
+      print("Prediction from MA Cross Over: sell")
+    }
+  } else{
+    if(x[len,2]<x[len,3]){ #nothing has changed, so wait
+      print("Prediction from MA Cross Over: wait")
+    } else { #shortMA has gone above longMA, so buy
+      print("Prediction from MA Cross Over: buy")
+    }
+  }
+}
 
 ####################################################
 # Function: find profit (fProfit)                  #
@@ -316,7 +326,6 @@ fProfit <- function(x, timeShort, timeLong){
    message("Total Profit: ", totalProfit)
    message("Relative Profit (ROI): ", round(((totalProfit/totalSpent)*100),2), " %")
    
-   
    # for testing the end of matrix
    #print(x[-1:-(length(x[,1])-1),])
    #print(length(x[,1]))
@@ -325,5 +334,6 @@ fProfit <- function(x, timeShort, timeLong){
 
 fProfit(mAvgsAll(X,45,100,.1,.9),45,100)
 gPredDataMA(mAvgsAll(X,30,50,0,0))
+gPredCrossMA(mAvgsAll(X,30,50,0,0))
 
-
+#DONE!
