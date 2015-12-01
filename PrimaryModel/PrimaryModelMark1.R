@@ -222,36 +222,76 @@ gPredDataMASell <- function(x){
   }
 }
 
-####################################################
-# Function: Give Prediction Crossover (gPredCross) #
-# Input: mAvgsAll(x) -- we'll use the data and WMA #
-# Return: "sell" "buy" "wait"                      #
-####################################################
+#############################################################
+# Function: Give Prediction Crossover of MAs (gPredCrossMA) #
+# Input: mAvgsAll(x) -- we'll use the two WMA cols          #
+# Return: "sell" "buy" "wait"                               #
+# Special: Will only return a single prediction since it    #
+#    compares two MAs there is no way to do more than one   #
+#    prediction without providing another input matrix with #
+#    different MAs                                          #
+#############################################################
 gPredCrossMA <- function(x){
   len <- length(x[,1])
   # check if short or long peroid is greater
   if(x[(len-1),2]>x[(len-1),3]){ #condition for short period being greater
     if(x[len,2]>x[len,3]){ #nothing has changed, so wait
-      print("Prediction from MA Cross Over: wait")
+      print("Prediction from cross: wait")
     } else { #shortMA has dipped below longMA, so sell
-      print("Prediction from MA Cross Over: sell")
+      print("Prediction from cross: sell")
     }
   } else{
     if(x[len,2]<x[len,3]){ #nothing has changed, so wait
-      print("Prediction from MA Cross Over: wait")
+      print("Prediction from cross: wait")
     } else { #shortMA has gone above longMA, so buy
-      print("Prediction from MA Cross Over: buy")
+      print("Prediction from cross: buy")
     }
   }
 }
 
+######################################################
+# Function: Give Prediction MA/MA (gPredCrossMASell) #
+# Input: mAvgsAll(x) -- we'll use the data and WMA   #
+# Return: true value for sell only                   #
+######################################################
+gPredCrossMASell <- function(x){
+  len <- length(x[,1])
+  if(x[(len-1),2]>x[(len-1),3]){ #condition for short period being greater
+    if(x[len,2]>x[len,3]){ #nothing has changed, so wait
+      return(FALSE)
+    } else { #shortMA has dipped below longMA, so sell
+      return(TRUE)
+    }
+  } else{ #if shortMA starts below longMA we would never sell
+    return(FALSE)
+  }
+}
+
+#####################################################
+# Function: Give Prediction MA/MA (gPredCrossMABuy) #
+# Input: mAvgsAll(x) -- we'll use the data and WMA  #
+# Return: true value for buy only                   #
+#####################################################
+gPredCrossMABuy <- function(x){
+  len <- length(x[,1])
+  if(x[(len-1),2]<x[(len-1),3]){ #condition for short period being greater
+    if(x[len,2]<x[len,3]){ #nothing has changed, so wait
+      return(FALSE)
+    } else { #shortMA has gone above longMA, so buy
+      return(TRUE)
+    }
+  } else{ # if shortMA starts below longMA we would never buy
+    return(FALSE)
+  } 
+}
+
 ####################################################
-# Function: find profit (fProfit)                  #
+# Function: find profit of Data|MA (fProfitDataMA) #
 # Input: mAvgsAll(x) -- we'll use the data and WMA #
 #         will need "buy" "sell" points            #
-# Return: "sell" "buy" "wait"                      #
+# Return: ROI and Profit Summary                   #
 ####################################################
-fProfit <- function(x, timeShort, timeLong){
+fProfitDataMA <- function(x, timeShort, timeLong){
    buyAmt      = 0 # amount a unit of stock was purchased at
    sellAmt     = 0 # amount a unit of stock sold for
    profit      = 0 # money made or lost
@@ -331,9 +371,53 @@ fProfit <- function(x, timeShort, timeLong){
    #print(length(x[,1]))
 }
 
+####################################################
+# Function: find profit of MA|MA (fProfitCrossMA)  #
+# Input: mAvgsAll(x) -- we'll use the data and WMA #
+#         will need "buy" "sell" points            #
+# Return: ROI and Profit Summary                   #
+####################################################
+fProfitCrossMA <- function(x, timeShort, timeLong){
+  buyAmt      = 0 # amount a unit of stock was purchased at
+  sellAmt     = 0 # amount a unit of stock sold for
+  profit      = 0 # money made or lost
+  totalProfit = 0 # tracks total profit
+  totalSpent  = 0 # tracks toatl buy amounts
+  
+  for (i in (timeShort+1):length(x[,1])){
+    xShort <- x[-(i+1):-length(x[,1]),]
+    
+    if(gPredCrossMABuy(xShort)){
+      buyAmt  = x[i,1]
+      # keep track of total amount spent, only changes with a buy
+      totalSpent  = buyAmt + totalSpent
+    } else if(gPredCrossMASell(xShort)){
+      sellAmt = x[i,1]
+      profit  = sellAmt-buyAmt
+      # keep track of total profit, only changes with a sell
+      totalProfit = profit + totalProfit 
+    } else if(i == length(x[,1])){
+      # if we are still waiting to sell when period ends, we sell for current amount
+      if (x[i,2]<buyAmt){ ###SPECIAL CONDITION FOR SHORT###
+        totalProfit = totalProfit + (x[i,1]-buyAmt)
+      } else{
+        # nothing is needed as amount has been sold
+      }
+      message("NOTE: final balance sold to calculate ROI")
+    } else{
+      # nothing else needs to happen because we are waiting for a sell prediction
+    }
+  }
+  message("MA SUMMARY & TOTALS:")
+  message("Total Spent: ", totalSpent)
+  message("Total Profit: ", totalProfit)
+  message("Relative Profit (ROI): ", round(((totalProfit/totalSpent)*100),2), " %")
+}
 
-fProfit(mAvgsAll(X,45,100,.1,.9),45,100)
-gPredDataMA(mAvgsAll(X,30,50,0,0))
-gPredCrossMA(mAvgsAll(X,30,50,0,0))
+fProfitDataMA(mAvgsAll(X,45,100,.1,.9),45,100)
+fProfitCrossMA(mAvgsAll(X,45,100,.1,.9),45,100)
+gPredDataMA(mAvgsAll(X,45,100,0,0))
+gPredCrossMA(mAvgsAll(X,45,100,0,0))
+gPredCrossMABuy(mAvgsAll(X,45,100,0,0))
 
 #DONE!
