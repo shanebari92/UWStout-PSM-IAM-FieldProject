@@ -6,10 +6,10 @@
 library(quantmod)
 
 # import and set data
-getSymbols('GS', src='yahoo', from='2014-01-01', to=Sys.Date()) #data gives Open, High, Low, Close, Volume, Adjusted
+getSymbols('MSFT', src='yahoo', from='2014-01-01', to=Sys.Date()) #data gives Open, High, Low, Close, Volume, Adjusted
 
 #check x input
-X <- matrix(cbind(GS), ncol = 6)
+X <- matrix(cbind(MSFT), ncol = 6)
 
 ##########################################################
 # Function: Weighted Averages (WMA)                      #
@@ -286,6 +286,34 @@ gPredCrossMABuy <- function(x){
 }
 
 ####################################################
+# Function: linear regression (lreg)               #
+# Input: a matrix (Will likely use mAvgsAll)       #
+# Return: slope and intercept                      #
+# Special: slope seems more significant            #
+####################################################
+lreg <- function(x, timeConsidered){ #timeConsidered is the nth most recent data points
+  # set up fillable matrix
+  dataMatrix <- matrix(c(c(seq(timeConsidered)),c(seq(timeConsidered))), ncol=2)
+  for(i in 1:timeConsidered){
+    jumpValue <- (length(x)-timeConsidered + i)
+    dataMatrix[i,1] <- jumpValue
+    dataMatrix[i,2] <- x[jumpValue]
+  }
+  # calculate correlation
+  r <- cor(dataMatrix[,1], dataMatrix[,2])
+  # calculate standard deviation
+  sx <- sd(dataMatrix[,1])
+  sy <- sd(dataMatrix[,2])
+  # calculate means
+  xbar <- mean(dataMatrix[,1])
+  ybar <- mean(dataMatrix[,2])
+  # calculate slope of least squares regression lin
+  slope <- r*(sy/sx)
+  # calcuclate y-intercept of least squares regression line
+  return(slope)
+}
+
+####################################################
 # Function: find profit of Data|MA (fProfitDataMA) #
 # Input: mAvgsAll(x) -- we'll use the data and WMA #
 #         will need "buy" "sell" points            #
@@ -384,12 +412,15 @@ fProfitCrossMA <- function(x, timeShort, timeLong){
   totalProfit = 0 # tracks total profit
   totalSpent  = 0 # tracks toatl buy amounts
   
-  for (i in (timeShort+1):length(x[,1])){
+  for (i in (timeLong+1):length(x[,1])){# must use time long since it does not exist when time short does!
     xShort <- x[-(i+1):-length(x[,1]),]
-    
+    print(i)
+    print(totalSpent)
+    print(totalProfit)
     if(gPredCrossMABuy(xShort)){
       buyAmt  = x[i,1]
       # keep track of total amount spent, only changes with a buy
+      sellAmt = buyAmt #we set the sellAmt=buyAmt so we do not buy again until after sell
       totalSpent  = buyAmt + totalSpent
     } else if(gPredCrossMASell(xShort)){
       sellAmt = x[i,1]
@@ -401,7 +432,7 @@ fProfitCrossMA <- function(x, timeShort, timeLong){
       if (x[i,2]<buyAmt){ ###SPECIAL CONDITION FOR SHORT###
         totalProfit = totalProfit + (x[i,1]-buyAmt)
       } else{
-        # nothing is needed as amount has been sold
+      # nothing is needed as amount has been sold
       }
       message("NOTE: final balance sold to calculate ROI")
     } else{
@@ -416,8 +447,20 @@ fProfitCrossMA <- function(x, timeShort, timeLong){
 
 fProfitDataMA(mAvgsAll(X,45,100,.1,.9),45,100)
 fProfitCrossMA(mAvgsAll(X,45,100,.1,.9),45,100)
-gPredDataMA(mAvgsAll(X,45,100,0,0))
-gPredCrossMA(mAvgsAll(X,45,100,0,0))
-gPredCrossMABuy(mAvgsAll(X,45,100,0,0))
+#gPredDataMA(mAvgsAll(X,45,100,0,0))
+#gPredCrossMA(mAvgsAll(X,45,100,0,0))
+#gPredCrossMABuy(mAvgsAll(X,45,100,0,0))
+#gPredCrossMASell(mAvgsAll(X,45,100,0,0))
+
+#TESTING STUFF
+#matrixTest <- matrix(c(1,1,1,1,1,1,1,1,1,1), ncol=1)
+#for(i in (length(matrixTest)-3):length(matrixTest)){
+#  matrixTest[i]=i
+#  print(matrixTest)
+#}
+#MatrixTest <- matrix(c(2,3,2,8,9,5,6,0,1,11),ncol=1)
+#shortTest <- MatrixTest[-1:(-5+1),]
+#
+#lreg(MatrixTest,3)
 
 #DONE!
