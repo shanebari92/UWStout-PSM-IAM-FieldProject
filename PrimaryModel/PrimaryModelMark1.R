@@ -6,10 +6,10 @@
 library(quantmod)
 
 # import and set data
-getSymbols('MSFT', src='yahoo', from='2014-01-01', to=Sys.Date()) #data gives Open, High, Low, Close, Volume, Adjusted
+getSymbols('GS', src='yahoo', from='2014-01-01', to=Sys.Date()) #data gives Open, High, Low, Close, Volume, Adjusted
 
 #check x input
-X <- matrix(cbind(MSFT), ncol = 6)
+X <- matrix(cbind(GS), ncol = 6)
 
 ##########################################################
 # Function: Weighted Averages (WMA)                      #
@@ -446,7 +446,7 @@ fProfitCrossMA <- function(x, timeShort, timeLong){
 }
 
 fProfitDataMA(mAvgsAll(X,45,100,.1,.9),45,100)
-fProfitCrossMA(mAvgsAll(X,45,100,.1,.9),45,100)
+#fProfitCrossMA(mAvgsAll(X,45,100,.1,.9),45,100)
 #gPredDataMA(mAvgsAll(X,45,100,0,0))
 #gPredCrossMA(mAvgsAll(X,45,100,0,0))
 #gPredCrossMABuy(mAvgsAll(X,45,100,0,0))
