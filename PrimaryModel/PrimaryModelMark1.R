@@ -6,7 +6,7 @@
 library(quantmod)
 
 # import and set data
-getSymbols('GS', src='yahoo', from='2014-01-01', to=Sys.Date()) #data gives Open, High, Low, Close, Volume, Adjusted
+getSymbols('GS', src='yahoo', from='2014-1-01', to=Sys.Date()) #data gives Open, High, Low, Close, Volume, Adjusted
 
 #check x input
 X <- matrix(cbind(GS), ncol = 6)
@@ -325,19 +325,38 @@ fProfitDataMA <- function(x, timeShort, timeLong){
    profit      = 0 # money made or lost
    totalProfit = 0 # tracks total profit
    totalSpent  = 0 # tracks toatl buy amounts
+   stockOn     = 0 # 0 if no stock, 1 if stock purchased INDICATIVE VARIABLE
    
    for (i in (timeShort+1):length(x[,1])){
      xShort <- x[-(i+1):-length(x[,1]),]
+     #print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+     #print(i)
+     #print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
+     #print('buy Amt')
+     #print(buyAmt)
+     #print('sell Amt')
+     #print(sellAmt)
+     #print('total profit')
+     #print(totalProfit)
+     #print('total spent')
+     #print(totalSpent)
+     #print('stock on')
+     #print(stockOn)
+     #print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
      
-     if(gPredDataMABuy(xShort)){
+     if(gPredDataMABuy(xShort) && stockOn==0){
+       #print("BUY!!!") # for debugging
        buyAmt  = x[i,1]
        # keep track of total amount spent, only changes with a buy
        totalSpent  = buyAmt + totalSpent
-     } else if(gPredDataMASell(xShort)){
+       stockOn = 1 # 1 indicates stock
+     } else if(gPredDataMASell(xShort) && stockOn==1 && buyAmt<x[i,1]){
+       #print("SELL!!!") # for debugging
        sellAmt = x[i,1]
        profit  = sellAmt-buyAmt
        # keep track of total profit, only changes with a sell
        totalProfit = profit + totalProfit 
+       stockOn = 0 # restart stock count
      } else if(i == length(x[,1])){
        # if we are still waiting to sell when period ends, we sell for current amount
        if (x[i,2]<buyAmt){ ###SPECIAL CONDITION FOR SHORT###
@@ -347,6 +366,7 @@ fProfitDataMA <- function(x, timeShort, timeLong){
        }
        message("NOTE: final balance sold to calculate ROI")
      } else{
+       #print("DO NOTHING!!!") # for debugging
        # nothing else needs to happen because we are waiting for a sell prediction
      }
    }
@@ -364,19 +384,22 @@ fProfitDataMA <- function(x, timeShort, timeLong){
    profit      = 0 # money made or lost
    totalProfit = 0 # tracks total profit
    totalSpent  = 0 # tracks toatl buy amounts
+   stockOn     = 0 # 0 if no stock, 1 if stock purchased INDICATIVE VARIABLE
    
    for (i in (timeLong+1):length(x[,1])){
      xLong <- x[-(i+1):-length(x[,1]),]
      
-     if(gPredDataMABuy(xLong)){
+     if(gPredDataMABuy(xLong) && stockOn==0){
        buyAmt  = x[i,1]
        # keep track of total amount spent, only changes with a buy
        totalSpent  = buyAmt + totalSpent
-     } else if(gPredDataMASell(xLong)){
+       stockOn = 1 # 1 indicates stock
+     } else if(gPredDataMASell(xLong) && stockOn==1 && buyAmt<x[i,1]){
        sellAmt = x[i,1]
        profit  = sellAmt-buyAmt
        # keep track of total profit, only changes with a sell
        totalProfit = profit + totalProfit 
+       stockOn = 0 # restart stock count
      } else if(i == length(x[,1])){
        # if we are still waiting to sell when period ends, we sell for current amount
        if (x[i,3]<buyAmt){ ###SPECIAL CONDITION FOR LONG###
@@ -411,22 +434,22 @@ fProfitCrossMA <- function(x, timeShort, timeLong){
   profit      = 0 # money made or lost
   totalProfit = 0 # tracks total profit
   totalSpent  = 0 # tracks toatl buy amounts
+  stockOn     = 0 # 0 if no stock, 1 if stock purchased INDICATIVE VARIABLE
   
   for (i in (timeLong+1):length(x[,1])){# must use time long since it does not exist when time short does!
     xShort <- x[-(i+1):-length(x[,1]),]
-    print(i)
-    print(totalSpent)
-    print(totalProfit)
-    if(gPredCrossMABuy(xShort)){
+    if(gPredCrossMABuy(xShort) && stockOn == 0){
       buyAmt  = x[i,1]
       # keep track of total amount spent, only changes with a buy
       sellAmt = buyAmt #we set the sellAmt=buyAmt so we do not buy again until after sell
       totalSpent  = buyAmt + totalSpent
-    } else if(gPredCrossMASell(xShort)){
+      stockOn = 1
+    } else if(gPredCrossMASell(xShort) && stockOn == 1){
       sellAmt = x[i,1]
       profit  = sellAmt-buyAmt
       # keep track of total profit, only changes with a sell
       totalProfit = profit + totalProfit 
+      stockOn = 0
     } else if(i == length(x[,1])){
       # if we are still waiting to sell when period ends, we sell for current amount
       if (x[i,2]<buyAmt){ ###SPECIAL CONDITION FOR SHORT###
@@ -445,8 +468,8 @@ fProfitCrossMA <- function(x, timeShort, timeLong){
   message("Relative Profit (ROI): ", round(((totalProfit/totalSpent)*100),2), " %")
 }
 
-fProfitDataMA(mAvgsAll(X,45,100,.1,.9),45,100)
-#fProfitCrossMA(mAvgsAll(X,45,100,.1,.9),45,100)
+fProfitDataMA(mAvgsAll(X,45,80,.1,.9),45,80)
+fProfitCrossMA(mAvgsAll(X,20,40,.1,.9),20,40)
 #gPredDataMA(mAvgsAll(X,45,100,0,0))
 #gPredCrossMA(mAvgsAll(X,45,100,0,0))
 #gPredCrossMABuy(mAvgsAll(X,45,100,0,0))
