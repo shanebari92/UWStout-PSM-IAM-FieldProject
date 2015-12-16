@@ -11,9 +11,19 @@ and some functions from the originals in the preliminary
 model.
 
 The following will be added to the Primary Model:
+<<<<<<< HEAD
 -predict function (based on MA|MA)
 -predict function (based on least squares)
 -profitability function (based on MA|MA)
 -profitability function (baseed on least squares)
 
 Russ
+=======
+-predict function (based on MA|MA)                  [ADDED: 11/30/15]
+-predict function (based on least squares)          []
+-profitability function (based on MA|MA)            []
+-profitability function (baseed on least squares)   []
+
+Russ
+
+>>>>>>> refs/remotes/keithwoj/master
